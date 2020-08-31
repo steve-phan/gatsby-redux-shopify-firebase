@@ -1,0 +1,40 @@
+.formWrap {
+    flex-direction: column;
+    align-items: center;
+   .line {
+       
+       font-weight: 700;
+       font-size: 1.2rem;
+   }
+
+    form {
+        margin-top: 10px;
+        width: 80%;
+    }
+
+    display: flex;
+    margin : 0 auto;
+    padding : 40px 0;
+    background : #efecec;
+    width: 60%;
+    box-shadow: 1px 2px 20px 10px #ddd;
+
+    button {
+        display: block;
+        margin-top: 30px;
+    }
+
+    span {
+        display: block;
+        margin: 20px 0 15px;
+        font-size: .8rem;
+        color: #888;
+
+    }
+
+    @media (max-width : 576px) {
+        width: 98%;
+    }
+
+
+}

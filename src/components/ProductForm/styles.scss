@@ -1,0 +1,38 @@
+.quantity-option {
+    font-weight: 400;
+    width: 112px;
+    min-width: 112px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1px;
+    border: 1px solid #d7d7d7;
+    background-color: #fff;
+    line-height: 20px;
+
+    .quantity-action {
+        box-sizing: content-box;
+        width: 11.5px;
+        height: 100%;
+        color: #888;
+        cursor: pointer;
+
+    }
+
+    .quantity-plus {
+        padding-right: 10px;
+        line-height: 38px;
+    }
+
+    .quantity-minus {
+        padding-left: 10px;
+        line-height: 38px;
+    }
+
+    .quantity-display {
+        text-align: center;
+        line-height: 38px;
+        color: #0779e4;
+        font-weight: 600;
+    }
+
+}
