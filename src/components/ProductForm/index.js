@@ -26,19 +26,24 @@ const ProductForm = ({ product }) => {
   const [totalPrice, setTotalPrice] = useState(price)
   const dispatch = useDispatch()
   const { products } = useSelector(mapState)
-  console.log(shopifyId)
+
   const handleAddToCart = () => {
     // setQuantity(quantity + value)
     // dispatch(addItem(products + parseInt(value)))
-    // const itemExits = products.find(item => item.shopifyId === shopifyId)
-    // const oldValue = itemExits.value || 0
+    const itemExits = products.find(item => item.shopifyId === shopifyId)
+    if (itemExits) {
+      itemExits.value = itemExits.value + value
 
-    products.push({
-      shopifyId,
-      price,
-      value: value,
-    })
+      // dispatch(addItem())
+    } else {
+      products.push({
+        shopifyId,
+        price,
+        value: value,
+      })
+    }
     dispatch(addItem(products))
+    localStorage.setItem('oderItems', JSON.stringify(products))
   }
   useEffect(() => {
     setTotalPrice(price * value)

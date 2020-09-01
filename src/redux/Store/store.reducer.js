@@ -6,11 +6,16 @@ const INITIAL_STORE_STATE = {
   //   price: null,
   //   value: null,
   // },
-  products: [],
+  products: JSON.parse(localStorage.getItem('oderItems')) || [],
 }
 const storeReducer = (state = INITIAL_STORE_STATE, action) => {
   switch (action.type) {
     case storeTypes.PLUS_ITEM:
+      return {
+        ...state,
+        products: action.payload,
+      }
+    case storeTypes.CLEAR_CART:
       return {
         ...state,
         products: action.payload,

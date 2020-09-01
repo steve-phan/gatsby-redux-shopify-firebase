@@ -8,6 +8,7 @@ import { auth } from './../../firebase/utils'
 import './styles.scss'
 import ShoppingCart from './../../assets/shopping.svg'
 import { userSignOut } from '../../redux/User/user.actions'
+import { clearCart } from '../../redux/Store/store.action'
 const mapState = ({ user, store }) => ({
   currentUser: user.currentUser,
   products: store.products,
@@ -29,15 +30,32 @@ const Navigation = props => {
       }
     })
   }
-  console.log(totalItem)
+  // console.log(products)
+  // if (products.length > 0) {
+  //   const x = products.map(item => item.value).reduce((a, b) => a + b)
+  //   console.log(x)
+  //   setTotalItem(x)
+  // }
+  // TODO Need  number 0 as a initial  value when reduce a empty array !
+  const x = products.map(item => item.value).reduce((a, b) => a + b, 0)
+  console.log(products)
+  useEffect(
+    () => {
+      if (products.length > 0) {
+        const j = products.map(item => item.value).reduce((a, b) => a + b, 0)
+        setTotalItem(j)
+      }
+      //  else {
+      //   setTotalItem(0)
+      // }
+      return () => {
+        setTotalItem(0)
+      }
+    },
 
-  useEffect(() => {
-    if (products.length > 0) {
-      const x = products.map(item => item.value).reduce((a, b) => a + b)
-      console.log(x)
-      setTotalItem(x)
-    }
-  }, [products.length])
+    // TODO Conditionally firing an effect , [dependencies]
+    [products.length, x]
+  )
 
   const handleSignOut = () => {
     auth
@@ -49,12 +67,17 @@ const Navigation = props => {
         console.log(err)
       })
   }
+  const clearItem = () => {
+    localStorage.clear('oderItems')
+    dispatch(clearCart())
+  }
   return (
     <div className="wrapper-navigation">
       <div className="container-navigation">
         <Link to="/" className="menulink-main">
           WeLoveTech
         </Link>
+        <button onClick={clearItem}>Clear Cart</button>
         <nav className="wrapper-nav">
           <div className={`account-modal ${openmodal}`}>
             <div className="modal-link">

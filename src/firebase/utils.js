@@ -48,13 +48,11 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = auth.onAuthStateChanged(userAuth => {
-      // console.log(auth.currentUser)
       if (!userAuth) {
         return
       }
       unsubscribe()
       resolve(userAuth)
     }, reject)
-    console.log(unsubscribe())
   })
 }
