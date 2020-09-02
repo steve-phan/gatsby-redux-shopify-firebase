@@ -6,7 +6,10 @@ const INITIAL_STORE_STATE = {
   //   price: null,
   //   value: null,
   // },
-  products: JSON.parse(localStorage.getItem('oderItems')) || [],
+  products:
+    (typeof window !== 'undefined' &&
+      JSON.parse(window.localStorage.getItem('oderItems'))) ||
+    [],
 }
 const storeReducer = (state = INITIAL_STORE_STATE, action) => {
   switch (action.type) {
