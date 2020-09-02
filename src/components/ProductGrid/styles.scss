@@ -1,3 +1,19 @@
+.wrap-main {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width : 576px) {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+
+}
+
+.oderboard-open {
+  display: none !important;
+
+}
+
 .pageHeadline {
   padding: 20px 0;
   text-align: center;
@@ -108,4 +124,25 @@
 
 .addCartBtn {
   line-height: 38px;
+}
+
+.cartSum {
+  .wrap-cartSum {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 98%;
+    width: 96%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2020;
+    background: #ff8000;
+    color: white;
+    padding: 16px 0;
+    border: 1px solid #ff8000;
+    font-size: 15px;
+    font-weight: 600;
+  }
 }

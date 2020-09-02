@@ -30,7 +30,7 @@ const Navigation = props => {
       }
     })
   }
-  // console.log(products)
+  console.log(products)
   // if (products.length > 0) {
   //   const x = products.map(item => item.value).reduce((a, b) => a + b)
   //   console.log(x)

@@ -1,0 +1,57 @@
+.wrap-OderItem {
+    height: 68px;
+    display: grid;
+    grid-template-columns: 1fr 6fr 2fr 1.8fr 20px;
+    text-align: center;
+    align-items: center;
+    font-size: 14px;
+
+
+    p {
+
+        text-align: justify;
+        padding-right: 3px;
+    }
+
+
+    button {
+        background: none;
+
+        svg {
+            height: 20px;
+            color: #034a6b;
+
+
+        }
+    }
+
+    .editItem {
+        width: 100%;
+
+        display: flex;
+        justify-content: space-evenly;
+        font-size: 26px;
+
+        color: #666;
+
+        button {
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            margin: 0 3px;
+        }
+
+        .editItem-plus {
+            padding: 0 6px;
+        }
+
+        .editItem-minus {
+
+            padding: 0 8px 2px 8px;
+        }
+
+
+    }
+
+
+
+}

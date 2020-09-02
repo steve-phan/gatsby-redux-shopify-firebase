@@ -10,7 +10,9 @@ import { niceUrl } from '../../../utils/node'
 
 import Plus from '../../assets/plus-solid.svg'
 import Minus from '../../assets/minus-solid.svg'
-import { set } from 'lodash'
+
+import { addItem } from '../../redux/Store/store.action'
+import OderBoard from '../OderBoard'
 
 const mapState = ({ store }) => ({
   products: store.products,
@@ -20,10 +22,11 @@ const ProductGrid = () => {
   const { products } = useSelector(mapState)
   const [value, setValue] = useState(1)
   const [testId, setTestId] = useState('')
-  console.log(value)
+  const [price, setPrice] = useState(1)
+  const [title, setTitle] = useState('')
+
   let x = 1
   useEffect(() => {
-    console.log(x)
     return () => {}
   }, [testId, value])
   const handlePlus = () => {
@@ -62,124 +65,160 @@ const ProductGrid = () => {
     `
   )
 
-  const updateDataPlus = e => {
-    if (testId === e) {
+  const updateDataPlus = (shopifyId, price) => {
+    // setPrice(price)
+    setTestId(shopifyId)
+    if (testId === shopifyId) {
       setValue(value + 1)
     } else {
-      setTestId(e)
       setValue(2)
     }
-    console.log(e)
-    console.log(`render ${x}`)
   }
-  const updateDataMinus = e => {
-    if (testId === e) {
+  const updateDataMinus = (shopifyId, price) => {
+    // setPrice(price)
+    setTestId(shopifyId)
+    if (testId === shopifyId) {
       setValue(value - 1)
     } else {
-      setTestId(e)
       setValue(1)
     }
   }
-  console.log(testId)
+  const addVariantToCart = (shopifyId, price, title) => {
+    const itemExits = products.find(item => item.shopifyId === shopifyId)
+    console.log(itemExits)
+    if (itemExits) {
+      shopifyId === testId ? (itemExits.value += value) : (itemExits.value += 1)
+      // dispatch(addItem())
+    } else {
+      // setValue(1)
+      products.push({
+        shopifyId: shopifyId,
+        price: price,
+        value: shopifyId === testId ? value : 1,
+        title,
+      })
+    }
+    console.log(value)
+    // console.log('just clicking')
+    // products.push({
+    //   shopifyId: testId,
+    //   value: value,
+    //   price: price,
+    // })
+    dispatch(addItem(products))
+    localStorage.setItem('oderItems', JSON.stringify(products))
+  }
 
   return (
-    <div className="wrraper-productGrid">
-      {allShopifyProduct.edges ? (
-        allShopifyProduct.edges.map(
-          ({
-            node: {
-              id,
-              handle,
-              title,
-              images: [firstImage],
-              variants: [firstVariant],
-            },
-          }) => {
-            return (
-              <div className="product-grid" key={id}>
-                <Link to={`/product/${niceUrl(handle)}/`}>
-                  {firstImage && firstImage.localFile && (
-                    <Image
-                      className="image-ProductGrid"
-                      fluid={firstImage.localFile.childImageSharp.fluid}
-                      alt={handle}
-                    />
-                  )}
-                </Link>
-                <Link to={`/product/${niceUrl(handle)}/`}>
-                  <span className="title-productGrid">{title}</span>
-                </Link>
-                <div className="fastbuy-btn">
-                  <div className="optionItem">
-                    {/* <h3>€{product.variants[0].price}</h3> */}
-                    <div className="quantity-select">
-                      <div className="quantity-option">
-                        <div
-                          onClick={() => {
-                            if (value === 1) return
-                            updateDataMinus(firstVariant.shopifyId)
-                          }}
-                          className="quantity-minus quantity-action"
-                        >
-                          <Minus />
-                        </div>
-                        <div className="quantity-display">
-                          <span>
-                            {testId === firstVariant.shopifyId ? value : 1}
-                          </span>
-                        </div>
-                        <div
-                          onClick={() => {
-                            console.log(testId)
-                            updateDataPlus(firstVariant.shopifyId)
-                          }}
-                          className="quantity-plus quantity-action"
-                        >
-                          <Plus />
+    <div className="wrap-main">
+      <div className="wrraper-productGrid">
+        {allShopifyProduct.edges ? (
+          allShopifyProduct.edges.map(
+            ({
+              node: {
+                id,
+                handle,
+                title,
+                images: [firstImage],
+                variants: [firstVariant],
+              },
+            }) => {
+              return (
+                <div className="product-grid" key={id}>
+                  <Link to={`/product/${niceUrl(handle)}/`}>
+                    {firstImage && firstImage.localFile && (
+                      <Image
+                        className="image-ProductGrid"
+                        fluid={firstImage.localFile.childImageSharp.fluid}
+                        alt={handle}
+                      />
+                    )}
+                  </Link>
+                  <Link to={`/product/${niceUrl(handle)}/`}>
+                    <span className="title-productGrid">{title}</span>
+                  </Link>
+                  <div className="fastbuy-btn">
+                    <div className="optionItem">
+                      {/* <h3>€{product.variants[0].price}</h3> */}
+                      <div className="quantity-select">
+                        <div className="quantity-option">
+                          <div
+                            onClick={() => {
+                              if (value === 1) return
+                              updateDataMinus(
+                                firstVariant.shopifyId,
+                                firstVariant.price,
+                                title
+                              )
+                            }}
+                            className="quantity-minus quantity-action"
+                          >
+                            <Minus />
+                          </div>
+                          <div className="quantity-display">
+                            <span>
+                              {testId === firstVariant.shopifyId ? value : 1}
+                            </span>
+                          </div>
+                          <div
+                            onClick={() => {
+                              console.log(testId)
+                              updateDataPlus(
+                                firstVariant.shopifyId,
+                                firstVariant.price,
+                                title
+                              )
+                            }}
+                            className="quantity-plus quantity-action"
+                          >
+                            <Plus />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="addCartBtn">
-                      <Button
-                      // onClick={() => addVariantToCart(firstVariant.shopifyId, 1)}
-                      >
-                        €
-                        {testId === firstVariant.shopifyId
-                          ? firstVariant.price * value
-                          : firstVariant.price}
-                      </Button>
+                      <div className="addCartBtn">
+                        <Button
+                          // onClick={() => addVariantToCart(firstVariant.shopifyId, 1)}
+                          onClick={() => {
+                            addVariantToCart(
+                              firstVariant.shopifyId,
+                              firstVariant.price,
+                              title
+                            )
+                          }}
+                        >
+                          €
+                          {testId === firstVariant.shopifyId
+                            ? firstVariant.price * value
+                            : firstVariant.price}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )
-          }
-        )
-      ) : (
-        <p>No Products found!</p>
-      )}
+              )
+            }
+          )
+        ) : (
+          <p>No Products found!</p>
+        )}
+      </div>
+      <div className="cartSum">
+        {products.length > 0 ? (
+          <div className="wrap-cartSum">
+            Total Item :{' '}
+            {products.map(item => item.value).reduce((a, b) => a + b, 0)}
+            Total Pay{' '}
+            {products
+              .map(item => item.price * item.value)
+              .reduce((a, b) => a + b, 0)}
+          </div>
+        ) : (
+          <> </>
+        )}
+      </div>
+      <OderBoard />
     </div>
   )
 }
 
 export default ProductGrid
-
-// const expandOder = () => {
-//   var coll = document.getElementsByClassName('collapsible')
-//   for (let i = 0; i < coll.length; i++) {
-//     coll[i].addEventListener('click', function() {
-//       this.classList.toggle('active')
-//       const content = this.nextElementSibling
-//       if (content.style.maxHeight) {
-//         console.log('max-height is leng')
-//         content.style.maxHeight = null
-//       } else {
-//         var x = document.getElementsByClassName('optionItem')
-//         for (var i = 0; i < x.length; i++) {
-//           x[i].style.maxHeight = null
-//         }
-//         content.style.maxHeight = content.scrollHeight + 'px'
-//       }
-//     })
-//   }
-// }

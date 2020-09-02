@@ -10,6 +10,7 @@ import { userAddAddress } from './../../redux/User/user.actions'
 import { auth, firestore, getCurrentUser } from './../../firebase/utils'
 import { navigate } from 'gatsby'
 import ProductGrid from '../ProductGrid'
+import OderBoard from '../OderBoard'
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -84,42 +85,25 @@ const Cart = () => {
   }
 
   return (
-    <div className="formWrap-Cart">
-      <div className="cartWrap">
-        <div className="cartItems">so line item</div>
-        <div className="cartDetails-wrap">
-          <div className="cartDetails">
-            <h4 className="subtotal">Subtotal : tong so luong items</h4>
-            <hr />
-            <p className="lineItemPay">€ tong tien </p>
-            <br />
-
-            {/* <h2>Taxes</h2>
-            <p>$ {checkout.totalTax}</p>
-            <br /> */}
-            {/* <h2>Total</h2>
-            <p>$ {checkout.totalPrice}</p>
-            <br /> */}
-            <button onClick={handleCheckout}>Check out</button>
-          </div>
-          <div className="cartDetails delivery-address">
-            <h4>Delivery Address </h4>
-            <hr />
-            {street ? (
-              <div className="user-address">
-                <h5> {displayName} </h5>
-                <span> {street} </span>
-                <span>{floor} </span>
-                <span> {postcode} </span>
-                <span>{city} </span>
-              </div>
-            ) : (
-              <p> update your address to Oder</p>
-            )}
-          </div>
-        </div>
+    <div className="wrap-cart">
+      <div className="cartDetails">
+        <OderBoard />
       </div>
-      )
+      <div className="delivery-address">
+        <h4>Delivery Address </h4>
+        <hr />
+        {street ? (
+          <div className="user-address">
+            <h5> {displayName} </h5>
+            <span> {street} </span>
+            <span>{floor} </span>
+            <span> {postcode} </span>
+            <span>{city} </span>
+          </div>
+        ) : (
+          <p> update your address to Oder</p>
+        )}
+      </div>
     </div>
   )
 }
