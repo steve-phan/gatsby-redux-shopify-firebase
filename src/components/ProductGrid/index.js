@@ -205,9 +205,9 @@ const ProductGrid = () => {
           <p>No Products found!</p>
         )}
       </div>
-      <div className="cartSum" onClick={gotoCart}>
+      <div className="cartSum">
         {products.length > 0 ? (
-          <div className="wrap-cartSum">
+          <div className="wrap-cartSum" onClick={gotoCart}>
             <p className="totalToItem">
               {products.map(item => item.value).reduce((a, b) => a + b, 0)}
             </p>

@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
 
-  @media (min-width : 576px) {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-  }
+  // @media (min-width : 576px) {
+  //   display: grid;
+  //   grid-template-columns: 3fr 1fr;
+  // }
 
 }
 
