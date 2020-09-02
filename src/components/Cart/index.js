@@ -11,6 +11,7 @@ import { auth, firestore, getCurrentUser } from './../../firebase/utils'
 import { navigate } from 'gatsby'
 import ProductGrid from '../ProductGrid'
 import OderBoard from '../OderBoard'
+import { Link } from 'gatsby'
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -88,20 +89,29 @@ const Cart = () => {
     <div className="wrap-cart">
       <div className="cartDetails">
         <OderBoard />
+        <button onClick={handleCheckout} className="oderNow">
+          Oder Now
+        </button>
       </div>
       <div className="delivery-address">
-        <h4>Delivery Address </h4>
-        <hr />
+        <h5>Delivery Address </h5>
+
         {street ? (
           <div className="user-address">
-            <h5> {displayName} </h5>
-            <span> {street} </span>
-            <span>{floor} </span>
+            <p> {displayName} </p>
+            <span className="user-street"> {street}</span>
+            <span> {floor ? `(${floor} floor)` : ''}</span>
             <span> {postcode} </span>
             <span>{city} </span>
           </div>
         ) : (
-          <p> update your address to Oder</p>
+          <div className="needAddress">
+            <span>
+              Please <Link to="/login">Login </Link> or{' '}
+              <Link to="/registation">Registation</Link>{' '}
+            </span>
+            <p> update your address to Oder</p>
+          </div>
         )}
       </div>
     </div>

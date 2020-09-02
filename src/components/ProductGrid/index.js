@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import { useStaticQuery, graphql, Link, navigate } from 'gatsby'
 import Image from 'gatsby-image'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -108,6 +108,9 @@ const ProductGrid = () => {
     dispatch(addItem(products))
     localStorage.setItem('oderItems', JSON.stringify(products))
   }
+  const gotoCart = () => {
+    navigate('/cart')
+  }
 
   return (
     <div className="wrap-main">
@@ -202,15 +205,21 @@ const ProductGrid = () => {
           <p>No Products found!</p>
         )}
       </div>
-      <div className="cartSum">
+      <div className="cartSum" onClick={gotoCart}>
         {products.length > 0 ? (
           <div className="wrap-cartSum">
-            Total Item :{' '}
-            {products.map(item => item.value).reduce((a, b) => a + b, 0)}
-            Total Pay{' '}
-            {products
-              .map(item => item.price * item.value)
-              .reduce((a, b) => a + b, 0)}
+            <p className="totalToItem">
+              {products.map(item => item.value).reduce((a, b) => a + b, 0)}
+            </p>
+            <p className="totalToOder">
+              Your Cart
+              <span className="totalToPay">
+                €
+                {products
+                  .map(item => item.price * item.value)
+                  .reduce((a, b) => a + b, 0)}
+              </span>
+            </p>
           </div>
         ) : (
           <> </>

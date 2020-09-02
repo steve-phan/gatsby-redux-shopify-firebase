@@ -127,6 +127,8 @@
 }
 
 .cartSum {
+  cursor: pointer;
+
   .wrap-cartSum {
     display: flex;
     position: fixed;
@@ -145,4 +147,27 @@
     font-size: 15px;
     font-weight: 600;
   }
+}
+
+.totalToItem {
+  position: fixed;
+  z-index: 2020;
+  left: 30px;
+  border-radius: 50%;
+  background: white;
+  color: #0779e4;
+  height: 36px;
+  width: 36px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transform: translateY(-9px);
+
+
+}
+
+.totalToPay {
+  color: #b12704;
+  padding-left: 15px;
 }

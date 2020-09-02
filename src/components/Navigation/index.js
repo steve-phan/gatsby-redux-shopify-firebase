@@ -77,7 +77,7 @@ const Navigation = props => {
         <Link to="/" className="menulink-main">
           WeLoveTech
         </Link>
-        <button onClick={clearItem}>Clear Cart</button>
+        {/* <button onClick={clearItem}>Clear Cart</button> */}
         <nav className="wrapper-nav">
           <div className={`account-modal ${openmodal}`}>
             <div className="modal-link">

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
+import { addItem } from '../../redux/Store/store.action'
 
 import './styles.scss'
 import Trash from '../../assets/trash.svg'
+import { set } from 'lodash'
 
 const mapState = ({ store }) => ({
   products: store.products,
@@ -11,8 +13,43 @@ const mapState = ({ store }) => ({
 
 const OderBoard = () => {
   const dispatch = useDispatch()
+  const [value, setValue] = useState(0)
+  const [shopifyId, setShopifyId] = useState('')
+
   const { products } = useSelector(mapState)
-  console.log(products)
+  const handlePlusAction = product => {
+    const item = products.find(item => item.shopifyId === product.shopifyId)
+    item.value += 1
+    dispatch(addItem(products))
+    localStorage.setItem('oderItems', JSON.stringify(products))
+    // setValue(item.value + 1)
+    // console.log(value)
+  }
+  const handleMinusAction = product => {
+    const item = products.find(item => item.shopifyId === product.shopifyId)
+
+    if (item.value === 1) {
+      console.log('het roi nhe')
+      const newProducts = products.filter(
+        item => item.shopifyId !== product.shopifyId
+      )
+      dispatch(addItem(newProducts))
+      localStorage.setItem('oderItems', JSON.stringify(newProducts))
+    } else {
+      item.value -= 1
+      dispatch(addItem(products))
+      localStorage.setItem('oderItems', JSON.stringify(products))
+    }
+  }
+  // useEffect(() => {
+  //   // setValue(product.value)
+  // }, [value, shopifyId])
+  // useEffect(() => {
+  //   effect
+  //   return () => {
+  //     cleanup
+  //   }
+  // }, [input])
 
   return (
     <div className="wrap-OderBoard">
@@ -20,14 +57,36 @@ const OderBoard = () => {
         <div className="main-OderBoard">
           {products.map(product => (
             <div className="wrap-OderItem" key={product.shopifyId}>
-              <span>{product.value}x </span>
+              <span className="value-OderItem">
+                {shopifyId === product.shopifyId ? value : product.value}x{' '}
+              </span>
               <p>{product.title} </p>
               <div className="editItem">
-                <button className="editItem-minus">-</button>
-                <button className="editItem-plus">+</button>
+                <button
+                  onClick={() => {
+                    handleMinusAction(product)
+                  }}
+                  className="editItem-minus"
+                >
+                  -
+                </button>
+                <button
+                  onClick={() => {
+                    handlePlusAction(product)
+                  }}
+                  className="editItem-plus"
+                >
+                  +
+                </button>
               </div>
 
-              <span> €{product.price * product.value} </span>
+              <span className="total-OderItem">
+                {' '}
+                €
+                {shopifyId === product.shopifyId
+                  ? value * product.price
+                  : product.price * product.value}{' '}
+              </span>
               <button className="trash">
                 {' '}
                 <Trash />
@@ -36,7 +95,7 @@ const OderBoard = () => {
           ))}
         </div>
       ) : (
-        <div>No item Added</div>
+        <div className="noItemAdded">No item Added</div>
       )}
     </div>
   )
