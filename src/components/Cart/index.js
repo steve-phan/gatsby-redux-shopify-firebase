@@ -61,39 +61,41 @@ const Cart = () => {
     if (!street) {
       alert('update your address to Oder')
       navigate('/dashboard')
-    }
-    const oderMail = () => {
-      return products
-        .map(product => {
-          return `<li> ${product.title} - ${product.value}x </li> `
-        })
-        .reduce((a, b) => a + b, '')
+    } else {
+      const oderMail = () => {
+        return products
+          .map(product => {
+            return `<li> ${product.title} - ${product.value}x </li> `
+          })
+          .reduce((a, b) => a + b, '')
+      }
+
+      const templateParams = {
+        message_html: `<div><ol> ${oderMail()} </ol></div>`,
+        from_name: 'WeloveFood',
+        to_bcc: `${email}`,
+      }
+
+      emailjs
+        .send(
+          'service_0kh9ok3',
+          'template_vNBZtXYN',
+          templateParams,
+          'user_kg0x3lYVzVIvxdN94ITu1'
+        )
+        .then(
+          result => {
+            alert('Your Oder is successfully')
+            dispatch(addItem([]))
+            localStorage.removeItem('oderItems')
+            navigate('/')
+          },
+          error => {
+            console.log(error.text)
+          }
+        )
     }
 
-    const templateParams = {
-      message_html: `<div><ol> ${oderMail()} </ol></div>`,
-      from_name: 'WeloveFood',
-      to_bcc: `${email}`,
-    }
-
-    emailjs
-      .send(
-        'service_0kh9ok3',
-        'template_vNBZtXYN',
-        templateParams,
-        'user_kg0x3lYVzVIvxdN94ITu1'
-      )
-      .then(
-        result => {
-          alert('Your Oder is successfully')
-          dispatch(addItem([]))
-          localStorage.removeItem('oderItems')
-          navigate('/')
-        },
-        error => {
-          console.log(error.text)
-        }
-      )
     // checkout.lineItems.forEach(item => {
     //   console.log(`${item.title} so luong : ${item.quantity}`)
     // }) // window.open(checkout.webUrl)
