@@ -29,9 +29,10 @@ const Cart = () => {
   const [floor, setFloor] = useState('')
   const [email, setEmail] = useState('')
 
-  const totalPay = products
-    .map(product => product.price * product.value)
-    .reduce((a, b) => a + b)
+  const totalPay =
+    products
+      .map(product => product.price * product.value)
+      .reduce((a, b) => a + b, 0) || ''
 
   const dispatch = useDispatch()
 
@@ -103,7 +104,7 @@ const Cart = () => {
       <div className="cartDetails">
         <OderBoard />
         <button onClick={handleCheckout} className="oderNow">
-          Oder Now €{totalPay}
+          Oder Now {totalPay ? `€${totalPay}` : ''}
         </button>
       </div>
       <div className="delivery-address">
