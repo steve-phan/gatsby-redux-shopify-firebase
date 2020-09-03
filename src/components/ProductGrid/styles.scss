@@ -116,14 +116,23 @@
 
 
 .optionItem {
+  // width: 100%;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 4fr;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .addCartBtn {
   line-height: 38px;
+
+  button {
+    float: right;
+    width: 160px;
+
+  }
 }
 
 .cartSum {

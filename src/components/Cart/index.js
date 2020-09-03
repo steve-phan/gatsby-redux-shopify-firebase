@@ -124,10 +124,10 @@ const Cart = () => {
           </div>
         ) : (
           <div className="needAddress">
-            <span>
+            {/* <span>
               Please <Link to="/login">Login </Link> or{' '}
               <Link to="/registation">Registation</Link>{' '}
-            </span>
+            </span> */}
             <p> update your address to Oder</p>
           </div>
         )}

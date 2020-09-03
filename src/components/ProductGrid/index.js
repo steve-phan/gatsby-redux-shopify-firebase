@@ -189,7 +189,7 @@ const ProductGrid = () => {
                             )
                           }}
                         >
-                          €
+                          Add to cart €
                           {testId === firstVariant.shopifyId
                             ? firstVariant.price * value
                             : firstVariant.price}
