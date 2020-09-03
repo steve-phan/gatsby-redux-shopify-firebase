@@ -41,6 +41,14 @@ const OderBoard = () => {
       localStorage.setItem('oderItems', JSON.stringify(products))
     }
   }
+  const removeOderItem = product => {
+    const item = products.find(item => item.shopifyId === product.shopifyId)
+    const newProducts = products.filter(
+      item => item.shopifyId !== product.shopifyId
+    )
+    dispatch(addItem(newProducts))
+    localStorage.setItem('oderItems', JSON.stringify(newProducts))
+  }
   // useEffect(() => {
   //   // setValue(product.value)
   // }, [value, shopifyId])
@@ -87,7 +95,12 @@ const OderBoard = () => {
                   ? value * product.price
                   : product.price * product.value}{' '}
               </span>
-              <button className="trash">
+              <button
+                onClick={() => {
+                  removeOderItem(product)
+                }}
+                className="trash"
+              >
                 {' '}
                 <Trash />
               </button>

@@ -24,6 +24,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
 
 // exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
 //   actions.setWebpackConfig({
+//     node: { fs: 'empty' },
 //     externals: getConfig().externals.concat(function(
 //       context,
 //       request,
@@ -66,3 +67,10 @@ exports.createPages = ({ graphql, actions }) => {
     })
   })
 }
+// exports.createNode = () => {
+//   if (node.internal.type === `File`) {
+//     fs.readFile(node.absolutePath, undefined, (_err, buf) => {
+//       createNodeField({ node, name: `contents`, value: buf.toString() })
+//     })
+//   }
+// }

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import emailjs from 'emailjs-com'
+import emailjs, { init } from 'emailjs-com'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -12,32 +12,34 @@ import { navigate } from 'gatsby'
 import ProductGrid from '../ProductGrid'
 import OderBoard from '../OderBoard'
 import { Link } from 'gatsby'
+import storeTypes from '../../redux/Store/store.types'
+import { addItem } from '../../redux/Store/store.action'
 
-const mapState = ({ user }) => ({
+const mapState = ({ user, store }) => ({
   currentUser: user.currentUser,
+  products: store.products,
 })
-
+init('user_kg0x3lYVzVIvxdN94ITu1')
 const Cart = () => {
-  const { currentUser } = useSelector(mapState)
+  const { currentUser, products } = useSelector(mapState)
   const [displayName, setDisplayName] = useState('')
   const [street, setStreet] = useState('')
   const [postcode, setPostcode] = useState('')
   const [city, setCity] = useState('')
   const [floor, setFloor] = useState('')
+  const [email, setEmail] = useState('')
+
+  const totalPay = products
+    .map(product => product.price * product.value)
+    .reduce((a, b) => a + b)
 
   const dispatch = useDispatch()
-
-  const templateParams = {
-    message_html: 'this is message',
-    from_name: 'We can code',
-    // oder_hello : checkout.lineItems[0].title
-  }
 
   useEffect(() => {
     getCurrentUser().then(user => {
       if (user) {
         const userRef = firestore.doc(`users/${user.uid}`)
-        // userRef.update({ ...additionalData })
+        setEmail(user.email)
         userRef
           .get()
           .then(doc => {
@@ -54,35 +56,46 @@ const Cart = () => {
     })
   }, [currentUser])
 
-  // emailjs.send('gmail', 'template_vNBZtXYN', {
-  //   reply_to: 'phanhaingoc@gmail.com',
-  //   to_name: 'KHANH',
-  //   from_name: 'lebenistcodd@gmail.com',
-  //   message_html: 'chan lam roi',
-  // })
   const handleCheckout = () => {
     if (!street) {
       alert('update your address to Oder')
       navigate('/dashboard')
     }
-    // emailjs
-    //   .send(
-    //     'gmail',
-    //     'template_vNBZtXYN',
-    //     templateParams,
-    //     'user_kg0x3lYVzVIvxdN94ITu1'
-    //   )
-    //   .then(
-    //     result => {
-    //       console.log(result.text)
-    //     },
-    //     error => {
-    //       console.log(error.text)
-    //     }
-    //   )
-    //  checkout.lineItems.forEach(item => {
-    //    console.log(`${item.title} so luong : ${item.quantity}`)
-    //  })    // window.open(checkout.webUrl)
+    const oderMail = () => {
+      return products
+        .map(product => {
+          return `<li> ${product.title} - ${product.value}x </li> `
+        })
+        .reduce((a, b) => a + b, '')
+    }
+
+    const templateParams = {
+      message_html: `<div><ol> ${oderMail()} </ol></div>`,
+      from_name: 'WeloveFood',
+      to_bcc: `${email}`,
+    }
+
+    emailjs
+      .send(
+        'service_0kh9ok3',
+        'template_vNBZtXYN',
+        templateParams,
+        'user_kg0x3lYVzVIvxdN94ITu1'
+      )
+      .then(
+        result => {
+          alert('Your Oder is successfully')
+          dispatch(addItem([]))
+          localStorage.removeItem('oderItems')
+          navigate('/')
+        },
+        error => {
+          console.log(error.text)
+        }
+      )
+    // checkout.lineItems.forEach(item => {
+    //   console.log(`${item.title} so luong : ${item.quantity}`)
+    // }) // window.open(checkout.webUrl)
   }
 
   return (
@@ -90,7 +103,7 @@ const Cart = () => {
       <div className="cartDetails">
         <OderBoard />
         <button onClick={handleCheckout} className="oderNow">
-          Oder Now
+          Oder Now €{totalPay}
         </button>
       </div>
       <div className="delivery-address">
