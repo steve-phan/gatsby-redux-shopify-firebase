@@ -61,6 +61,7 @@ const Cart = () => {
     if (!street) {
       alert('update your address to Oder')
       navigate('/dashboard')
+      return
     } else {
       const oderMail = () => {
         return products
@@ -69,6 +70,7 @@ const Cart = () => {
           })
           .reduce((a, b) => a + b, '')
       }
+      console.log(street)
 
       const templateParams = {
         message_html: `<div><ol> ${oderMail()} </ol></div>`,

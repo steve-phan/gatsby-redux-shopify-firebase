@@ -46,6 +46,7 @@ export default function DashBoard() {
       .catch(err => console.log(err))
   }
   useEffect(() => {
+    let isSubscribed = true
     getCurrentUser().then(user => {
       if (!user) {
         return
@@ -55,7 +56,7 @@ export default function DashBoard() {
         userRef
           .get()
           .then(doc => {
-            if (doc.data().street) {
+            if (doc.data().street && isSubscribed) {
               setStreet(doc.data().street)
               setPostcode(doc.data().postcode)
               setCity(doc.data().city)
@@ -65,6 +66,7 @@ export default function DashBoard() {
           .catch(err => console.log(err))
       }
     })
+    return () => (isSubscribed = false)
   }, [currentUser])
 
   if (!currentUser) {
