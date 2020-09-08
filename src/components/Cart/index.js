@@ -107,8 +107,12 @@ const Cart = () => {
     <div className="wrap-cart">
       <div className="cartDetails">
         <OderBoard />
-        <button onClick={handleCheckout} className="oderNow">
-          Oder Now {totalPay ? `€${totalPay}` : ''}
+        <button
+          onClick={handleCheckout}
+          className="oderNow"
+          disabled={products.length === 0}
+        >
+          Oder Now {totalPay ? `€${totalPay.toFixed(2)}` : ''}
         </button>
       </div>
       <div className="delivery-address">

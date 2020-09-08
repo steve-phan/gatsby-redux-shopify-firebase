@@ -6,9 +6,10 @@ import SEO from '~/components/seo'
 import ProductForm from '~/components/ProductForm'
 
 import './styles.scss'
-
 const ProductPage = ({ data }) => {
   const product = data.shopifyProduct
+
+  console.log(product)
   return (
     <>
       <SEO title={product.title} description={product.description} />
@@ -88,5 +89,6 @@ export const query = graphql`
     }
   }
 `
+//* two cury bracket
 
 export default ProductPage

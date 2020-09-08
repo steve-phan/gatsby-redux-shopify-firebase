@@ -1,7 +1,7 @@
 export const firebaseConfig = {
   apiKey: 'AIzaSyCZashJEowUyom6Mvh1QWHueNgTVKHZvAU',
   // authDomain: "foodapp-2c83e.firebaseapp.com",
-  authDomain: 'dexemnao.com',
+  authDomain: 'auth.dexemnao.com',
   databaseURL: 'https://foodapp-2c83e.firebaseio.com',
   projectId: 'foodapp-2c83e',
   storageBucket: 'foodapp-2c83e.appspot.com',

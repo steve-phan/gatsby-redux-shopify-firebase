@@ -19,6 +19,7 @@ const OderBoard = () => {
   const { products } = useSelector(mapState)
   const handlePlusAction = product => {
     const item = products.find(item => item.shopifyId === product.shopifyId)
+    console.log(item.value)
     item.value += 1
     dispatch(addItem(products))
     localStorage.setItem('oderItems', JSON.stringify(products))
@@ -29,7 +30,6 @@ const OderBoard = () => {
     const item = products.find(item => item.shopifyId === product.shopifyId)
 
     if (item.value === 1) {
-      console.log('het roi nhe')
       const newProducts = products.filter(
         item => item.shopifyId !== product.shopifyId
       )
@@ -89,11 +89,10 @@ const OderBoard = () => {
               </div>
 
               <span className="total-OderItem">
-                {' '}
                 €
                 {shopifyId === product.shopifyId
-                  ? value * product.price
-                  : product.price * product.value}{' '}
+                  ? (value * product.price).toFixed(2)
+                  : (product.price * product.value).toFixed(2)}
               </span>
               <button
                 onClick={() => {
@@ -101,7 +100,6 @@ const OderBoard = () => {
                 }}
                 className="trash"
               >
-                {' '}
                 <Trash />
               </button>
             </div>

@@ -21,6 +21,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
 }
 
 //Develop Only
+// https://foodapp-2c83e.firebaseapp.com/__/auth/handler
 
 // exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
 //   actions.setWebpackConfig({

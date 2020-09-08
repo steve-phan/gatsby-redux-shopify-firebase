@@ -1,111 +1,155 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-      .collapsible {
-        background-color: #777;
-        color: white;
-        cursor: pointer;
-        padding: 18px;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 15px;
+      html {
+        scroll-behavior: smooth;
       }
-
-      .active,
-      .collapsible:hover {
-        background-color: #555;
+      body {
+        position: relative;
       }
-
-      .collapsible:after {
-        content: '\002B';
-        color: white;
-        font-weight: bold;
-        float: right;
-        margin-left: 5px;
+      #section1 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #1e88e5;
       }
-
-      .active:after {
-        content: '\2212';
+      #section2 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #673ab7;
       }
-
-      .content {
-        padding: 0 18px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        background-color: #f1f1f1;
+      #section3 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #ff9800;
+      }
+      #section41 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #00bcd4;
+      }
+      #section42 {
+        padding-top: 50px;
+        height: 500px;
+        color: #fff;
+        background-color: #009688;
       }
     </style>
   </head>
-  <body>
-    <h2>Animated Collapsibles</h2>
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WebSiteName</a>
+        </div>
+        <div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li><a href="#section1">Section 1</a></li>
+              <li><a href="#section2">Section 2</a></li>
+              <li><a href="#section3">Section 3</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                  >Section 4 <span class="caret"></span
+                ></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#section41">Section 4-1</a></li>
+                  <li><a href="#section42">Section 4-2</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-    <p>A Collapsible:</p>
-    <button class="collapsible">Open Collapsible</button>
-    <div class="content">
+    <div id="section1" class="container-fluid">
+      <h1>Section 1</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
+      </p>
+      <p>
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
       </p>
     </div>
-
-    <p>Collapsible Set:</p>
-    <button class="collapsible">Open Section 1</button>
-    <div class="content">
+    <div id="section2" class="container-fluid">
+      <h1>Section 2</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
+      </p>
+      <p>
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
       </p>
     </div>
-    <button class="collapsible">Open Section 2</button>
-    <div class="content">
+    <div id="section3" class="container-fluid">
+      <h1>Section 3</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
+      </p>
+      <p>
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
       </p>
     </div>
-    <button class="collapsible">Open Section 3</button>
-    <div class="content">
+    <div id="section41" class="container-fluid">
+      <h1>Section 4 Submenu 1</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
+      </p>
+      <p>
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
       </p>
     </div>
-
-    <script>
-      var coll = document.getElementsByClassName('collapsible')
-      var i
-
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener('click', function() {
-          this.classList.toggle('active')
-          var content = this.nextElementSibling
-          console.log(content)
-          if (content.style.maxHeight) {
-            console.log('max-height is leng')
-            content.style.maxHeight = null
-          } else {
-            var x = document.getElementsByClassName('content')
-            for (var i = 0; i < x.length; i++) {
-              x[i].style.maxHeight = null
-            }
-            content.style.maxHeight = content.scrollHeight + 'px'
-          }
-        })
-      }
-    </script>
-    <script src="/test.js"></script>
+    <div id="section42" class="container-fluid">
+      <h1>Section 4 Submenu 2</h1>
+      <p>
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
+      </p>
+      <p>
+        Try to scroll this section and look at the navigation bar while
+        scrolling! Try to scroll this section and look at the navigation bar
+        while scrolling!
+      </p>
+    </div>
   </body>
 </html>
