@@ -382,6 +382,12 @@ html {
   }
 }
 
+@media () {
+  .wrraper-productGrid {
+    width: calc(100% - 320px -230px);
+  }
+}
+
 
 // @media (max-width : 1350px) {
 //   .productType {
