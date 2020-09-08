@@ -382,7 +382,7 @@ html {
   }
 }
 
-@media () {
+@media (min-width : 1280px) {
   .wrraper-productGrid {
     width: calc(100% - 320px -230px);
   }
