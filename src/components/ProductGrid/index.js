@@ -144,9 +144,9 @@ const ProductGrid = () => {
         </Link>
         <Link to={`/product/${niceUrl(handle)}/`}>
           <span className="title-productGrid">{title}</span>
-          <p className="item-description"> {description && description}</p>
           {}
         </Link>
+        <p className="item-description"> {description && description}</p>
         <div className="fastbuy-btn">
           <div className="optionItem">
             {/* <h3>€{product.variants[0].price}</h3> */}
@@ -568,7 +568,7 @@ const ProductGrid = () => {
               }
             )}
         </section>
-        <div className="cartSum">
+        {/* <div className="cartSum">
           {products.length > 0 ? (
             <div className="wrap-cartSum" onClick={gotoCart}>
               <p className="totalToItem">
@@ -588,12 +588,33 @@ const ProductGrid = () => {
           ) : (
             <> </>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="oderDetails">
         <div className="oderDetails-main">
           <OderBoard />
+          <div className="cartSum cartSum-wide">
+            {products.length > 0 ? (
+              <div className="wrap-cartSum" onClick={gotoCart}>
+                <p className="totalToItem">
+                  {products.map(item => item.value).reduce((a, b) => a + b, 0)}
+                </p>
+                <p className="totalToOder">
+                  Your Cart
+                  <span className="totalToPay">
+                    €
+                    {products
+                      .map(item => item.price * item.value)
+                      .reduce((a, b) => a + b, 0)
+                      .toFixed(2)}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <> </>
+            )}
+          </div>
         </div>
       </div>
     </div>

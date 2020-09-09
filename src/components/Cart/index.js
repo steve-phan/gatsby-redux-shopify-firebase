@@ -112,7 +112,7 @@ const Cart = () => {
           className="oderNow"
           disabled={products.length === 0}
         >
-          Oder Now {totalPay ? `€${totalPay.toFixed(2)}` : ''}
+          Bestellen {totalPay ? `€${totalPay.toFixed(2)}` : ''}
         </button>
       </div>
       <div className="delivery-address">

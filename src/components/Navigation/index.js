@@ -129,7 +129,7 @@ const Navigation = props => {
           </div>
         </div>
         <Link to="/" className="menulink-main">
-          WeLoveTech
+          DeXemNao
         </Link>
         {/* <button onClick={clearItem}>Clear Cart</button> */}
         <nav className="wrapper-nav">

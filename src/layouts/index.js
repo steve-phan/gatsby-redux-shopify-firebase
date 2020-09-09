@@ -48,7 +48,7 @@ const Layout = ({ children }) => {
               <div className="wrapper-layout">
                 <div className="wrapper-main">{children}</div>
                 <footer>
-                  <span>© {new Date().getFullYear()}, WeloveTech</span>
+                  <span>© {new Date().getFullYear()}, Dexemnao</span>
                 </footer>
               </div>
             </>

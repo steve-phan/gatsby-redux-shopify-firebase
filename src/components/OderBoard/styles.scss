@@ -1,5 +1,6 @@
 .main-OderBoard {
 
+    width: 100%;
 
     .oderNow {
         display: flex;
@@ -9,7 +10,7 @@
         width: 100%;
         justify-content: center;
         margin-right: -2px;
-        background: #ff8000;
+        background: linear-gradient(0deg, white, #bf6102);
         color: white;
         font-size: 18px;
         font-weight: 600;
@@ -22,17 +23,18 @@
     height: 68px;
     display: grid;
     grid-template-columns: 1fr 6fr 2fr 1.8fr 30px;
-    text-align: center;
+
     align-items: center;
     font-size: 14px;
     color: #0F1111;
     border-bottom: 1px #ddd solid;
+    padding-left: 10px;
 
 
 
     p {
 
-        text-align: justify;
+        word-break: break-word;
         padding-right: 3px;
     }
 
@@ -53,14 +55,15 @@
 
         display: flex;
         justify-content: space-evenly;
-        font-size: 26px;
+        font-size: 22px;
 
         color: #666;
 
         button {
-            border: 1px solid #ddd;
+            border: 1px solid #eeecec;
             border-radius: 2px;
             margin: 0 3px;
+            font-weight: 100;
         }
 
         .editItem-plus {
@@ -80,11 +83,22 @@
 }
 
 .value-OderItem {
-    color: #0779e4;
+    // color: #0779e4;
 
 }
 
 .total-OderItem {
-    color: #b12704;
-    font-weight: 600;
+    color: #0F1111;
+    font-weight: 400;
+}
+
+.wrap-OderBoard {
+    width: 100%;
+}
+
+.noItemAdded {
+    p {
+        padding: 20px 0;
+        text-align: center;
+    }
 }

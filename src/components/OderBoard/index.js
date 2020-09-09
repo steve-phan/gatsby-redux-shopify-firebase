@@ -6,6 +6,7 @@ import { addItem } from '../../redux/Store/store.action'
 import './styles.scss'
 import Trash from '../../assets/trash.svg'
 import { set } from 'lodash'
+import Button from '../../ShareForm/Button'
 
 const mapState = ({ store }) => ({
   products: store.products,
@@ -106,7 +107,13 @@ const OderBoard = () => {
           ))}
         </div>
       ) : (
-        <div className="noItemAdded">No item Added</div>
+        <div className="noItemAdded">
+          <p>Ihr warenkorb ist leer</p>
+
+          <p>Wähle leckere Gerichte aus der Menu !</p>
+
+          <p> Mindestbestellwert von 12,00 € (Versandkostenlos)</p>
+        </div>
       )}
     </div>
   )
