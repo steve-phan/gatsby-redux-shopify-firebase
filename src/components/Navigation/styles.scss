@@ -17,6 +17,85 @@ $maincolor : #034a6b;
 
 }
 
+.menubar-icon {
+    position: fixed;
+    top: 34px;
+    left: 20px;
+    width: 22px;
+    height: 2px;
+    background: white;
+}
+
+.menubar-icon::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 22px;
+    height: 2px;
+    background: white;
+}
+
+.menubar-icon::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    width: 22px;
+    height: 2px;
+    background: white;
+}
+
+.menubar-modal-box {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2060;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    background: white;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease-in-out;
+
+    .menubar-modal-wrap {
+        padding-left: 20px;
+    }
+
+    .menubar-home {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .menubar-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-weight: 700;
+    }
+}
+
+#menubar-toggle:checked~.overlay {
+    display: block;
+}
+
+#menubar-toggle:checked~.menubar-modal-box {
+    transform: translateX(0)
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
 .menulink-main {
     color: white;
     margin-left: 2px !important;
@@ -148,4 +227,15 @@ $maincolor : #034a6b;
 
 .openmodal {
     display: block;
+}
+
+@media (max-width : 1280px) {
+    .menulink-main {
+        display: none;
+    }
+
+    .container-navigation {
+        justify-content: flex-end;
+        margin-right: -25px;
+    }
 }

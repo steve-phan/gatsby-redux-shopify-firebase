@@ -5,41 +5,41 @@ const { niceUrl } = require('./utils/node.js')
 
 // Build live site
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /firebase/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
-  }
-}
+// exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+//   if (stage === 'build-html') {
+//     actions.setWebpackConfig({
+//       module: {
+//         rules: [
+//           {
+//             test: /firebase/,
+//             use: loaders.null(),
+//           },
+//         ],
+//       },
+//     })
+//   }
+// }
 
 //Develop Only
 // https://foodapp-2c83e.firebaseapp.com/__/auth/handler
 
-// exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
-//   actions.setWebpackConfig({
-//     node: { fs: 'empty' },
-//     externals: getConfig().externals.concat(function(
-//       context,
-//       request,
-//       callback
-//     ) {
-//       const regex = /^firebase(\/(.+))?/
-//       // exclude firebase products from being bundled, so they will be loaded using require() at runtime.
-//       if (regex.test(request)) {
-//         return callback(null, 'umd ' + request)
-//       }
-//       callback()
-//     }),
-//   })
-// }
+exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
+  actions.setWebpackConfig({
+    node: { fs: 'empty' },
+    externals: getConfig().externals.concat(function(
+      context,
+      request,
+      callback
+    ) {
+      const regex = /^firebase(\/(.+))?/
+      // exclude firebase products from being bundled, so they will be loaded using require() at runtime.
+      if (regex.test(request)) {
+        return callback(null, 'umd ' + request)
+      }
+      callback()
+    }),
+  })
+}
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions

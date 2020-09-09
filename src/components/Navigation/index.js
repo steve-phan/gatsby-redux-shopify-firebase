@@ -74,6 +74,58 @@ const Navigation = props => {
   return (
     <div className="wrapper-navigation">
       <div className="container-navigation">
+        <div className="menubar-modal">
+          <input hidden type="checkbox" name="" id="menubar-toggle" />
+          <label htmlFor="menubar-toggle" className="menubar-icon"></label>
+
+          <label htmlFor="menubar-toggle" className="overlay"></label>
+          <div className="menubar-modal-box">
+            <div className="menubar-header">
+              <Link className="menubar-home" to="/">
+                Home
+              </Link>
+              <label htmlFor="menubar-toggle" className="menubar-close">
+                {' '}
+                &#10005;
+              </label>
+            </div>
+            <ul className="menubar-modal-wrap">
+              <li>
+                {' '}
+                <Link to="/#beliebte">Beliebte Gerichte</Link>{' '}
+              </li>
+              <li>
+                <Link to="/#suppen">Suppen</Link>
+              </li>
+              <li>
+                <Link to="/#salat"> Salat </Link>
+              </li>
+              <li>
+                <Link to="/#vorspeisen">Vorspeisen</Link>
+              </li>
+              <li>
+                <Link to="/#reisundnudeln">Gerichte mit Reis und Nudeln</Link>
+              </li>
+              <li>
+                <Link to="/#mitente">Gerichte mit Ente</Link>
+              </li>
+              <li>
+                <Link to="/#mitschwein">Gerichte mit Schweinefleisch</Link>
+              </li>
+              <li>
+                <Link to="/#mithuhn">Gerichte mit Hühnerfleisch</Link>
+              </li>
+              <li>
+                {' '}
+                <Link to="/#mitrind">Gerichte mit Rindfleisch</Link>
+              </li>
+
+              <li>
+                <Link to="/#vegetarian">Vegetarische Gerichte</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
         <Link to="/" className="menulink-main">
           WeLoveTech
         </Link>
