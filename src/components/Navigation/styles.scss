@@ -17,6 +17,19 @@ $maincolor : #034a6b;
 
 }
 
+.menubar-icon-wrap {
+    width: 36px;
+    height: 36px;
+    /* background: blue; */
+    display: block;
+    position: absolute;
+    top: 17px;
+    left: 13px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
 .menubar-icon {
     position: fixed;
     top: 34px;
@@ -54,17 +67,29 @@ $maincolor : #034a6b;
     flex-direction: column;
     justify-content: center;
     width: 300px;
+
     background: white;
     transform: translateX(-100%);
-    transition: transform 0.35s ease-in-out;
+    opacity: 0;
+    transition: all 0.35s ease-in-out;
+
+    a {
+        color: #1d2129;
+    }
 
     .menubar-modal-wrap {
         padding-left: 20px;
+        height: 80%;
+        border-top: 4px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
     }
 
     .menubar-home {
         position: absolute;
-        top: 16px;
+        top: 26px;
         left: 16px;
         font-weight: 700;
         font-size: 20px;
@@ -72,7 +97,7 @@ $maincolor : #034a6b;
 
     .menubar-close {
         position: absolute;
-        top: 10px;
+        top: 20px;
         right: 10px;
         font-weight: 700;
     }
@@ -83,7 +108,8 @@ $maincolor : #034a6b;
 }
 
 #menubar-toggle:checked~.menubar-modal-box {
-    transform: translateX(0)
+    transform: translateX(0);
+    opacity: 1;
 }
 
 .overlay {
@@ -94,6 +120,21 @@ $maincolor : #034a6b;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
     display: none;
+    animation: fadeIn .35s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .menulink-main {

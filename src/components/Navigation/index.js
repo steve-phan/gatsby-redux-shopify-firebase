@@ -76,14 +76,16 @@ const Navigation = props => {
       <div className="container-navigation">
         <div className="menubar-modal">
           <input hidden type="checkbox" name="" id="menubar-toggle" />
-          <label htmlFor="menubar-toggle" className="menubar-icon"></label>
-
+          <label htmlFor="menubar-toggle" className="menubar-icon-wrap">
+            <label htmlFor="menubar-toggle" className="menubar-icon"></label>
+          </label>
           <label htmlFor="menubar-toggle" className="overlay"></label>
           <div className="menubar-modal-box">
             <div className="menubar-header">
               <Link className="menubar-home" to="/">
                 Home
               </Link>
+
               <label htmlFor="menubar-toggle" className="menubar-close">
                 {' '}
                 &#10005;
@@ -92,7 +94,7 @@ const Navigation = props => {
             <ul className="menubar-modal-wrap">
               <li>
                 {' '}
-                <Link to="/#beliebte">Beliebte Gerichte</Link>{' '}
+                <Link to="/#beliebte">Beliebte Gerichte</Link>
               </li>
               <li>
                 <Link to="/#suppen">Suppen</Link>
