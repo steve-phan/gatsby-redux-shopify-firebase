@@ -5,7 +5,7 @@ import 'firebase/firestore'
 
 //redux Import
 import { userAddAddress } from './../redux/User/user.actions'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 firebase.initializeApp(firebaseConfig)
 
@@ -18,6 +18,9 @@ export const FacebookProvider = new firebase.auth.FacebookAuthProvider()
 export const PhoneAuthProvider = new firebase.auth.PhoneAuthProvider()
 GoogleProvider.setCustomParameters({ promt: 'select_acount' })
 
+const mapState = ({ user }) => ({
+  userAddress: user.userAddress,
+})
 export const handleUserProfile = async ({ userAuth, additionalData }) => {
   if (!userAuth) return
   const { uid } = userAuth

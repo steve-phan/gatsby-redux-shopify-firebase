@@ -15,14 +15,16 @@ import userTypes from '../../redux/User/user.types'
 import {
   signInWithGoogle,
   signInWithFacebook,
+  userAddAddress,
 } from '../../redux/User/user.actions'
 
-const mapState = user => ({
-  currentUser: userTypes.currentUser,
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser,
+  userAddress: user.userAddress,
 })
 export default function SocialLogin() {
   const dispatch = useDispatch()
-  const { currentUser } = useSelector(mapState)
+  const { currentUser, userAddress } = useSelector(mapState)
 
   const handleOnClickGoogle = e => {
     e.preventDefault()
@@ -31,6 +33,8 @@ export default function SocialLogin() {
       .then(user => {
         const additionalData = user.user.displayName
         const userAuth = user.user
+        // userAddress.push({ fullName: additionalData })
+        // dispatch(userAddAddress(userAddress))
         handleUserProfile({ userAuth, additionalData })
         dispatch(signInWithGoogle())
       })
@@ -47,6 +51,8 @@ export default function SocialLogin() {
         console.log('login facebook successfully')
         const additionalData = user.user.displayName
         const userAuth = user.user
+        // userAddress.push({ fullName: additionalData })
+        // dispatch(userAddAddress(userAddress))
         handleUserProfile({ userAuth, additionalData })
         dispatch(signInWithFacebook())
       })
@@ -58,17 +64,12 @@ export default function SocialLogin() {
   return (
     <div className="wrapper-social-login">
       <Button onClick={handleOnClickGoogle}>
-        <p>
-          <GoogleIcon />
-          Login with Google
-        </p>
+        <GoogleIcon />
+        <p>Login with Google</p>
       </Button>
       <Button onClick={handleClickFacebook}>
-        <p>
-          {' '}
-          <FacebokIcon />
-          Login with Facebook
-        </p>
+        <FacebokIcon />
+        <p>Login with Facebook</p>
       </Button>
     </div>
   )

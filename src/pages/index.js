@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 
 import SEO from '~/components/seo'
 import ProductGrid from '~/components/ProductGrid'
+import Home from '../components/Home'
 
 const IndexPage = () => (
   <>
@@ -10,7 +11,8 @@ const IndexPage = () => (
       title="Home"
       keywords={[`restaurant`, `food`, `asian footd`, `delivery food`]}
     />
-    <ProductGrid />
+    <Home />
+    {/* <ProductGrid /> */}
   </>
 )
 

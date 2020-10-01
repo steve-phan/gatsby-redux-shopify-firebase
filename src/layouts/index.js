@@ -15,6 +15,7 @@ import Navigation from '~/components/Navigation'
 
 import { store } from './../redux/createStore'
 import './styles.scss'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Wrapper = styled.div`
   margin: 0 auto;

@@ -568,27 +568,6 @@ const ProductGrid = () => {
               }
             )}
         </section>
-        {/* <div className="cartSum">
-          {products.length > 0 ? (
-            <div className="wrap-cartSum" onClick={gotoCart}>
-              <p className="totalToItem">
-                {products.map(item => item.value).reduce((a, b) => a + b, 0)}
-              </p>
-              <p className="totalToOder">
-                Your Cart
-                <span className="totalToPay">
-                  €
-                  {products
-                    .map(item => item.price * item.value)
-                    .reduce((a, b) => a + b, 0)
-                    .toFixed(2)}
-                </span>
-              </p>
-            </div>
-          ) : (
-            <> </>
-          )}
-        </div> */}
       </div>
 
       <div className="oderDetails">

@@ -3,7 +3,7 @@ import userTypes from './user.types'
 const INITIAL_STATE = {
   currentUser: null,
   errors: null,
-  userAddress: {},
+  userAddress: [],
 }
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -47,6 +47,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        userAddress: [],
       }
     case userTypes.USER_ADD_ADDRESS:
       return {

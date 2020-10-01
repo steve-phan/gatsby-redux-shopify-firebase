@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { auth } from './../../firebase/utils'
+import { auth, firestore } from './../../firebase/utils'
+
+import { Button } from 'react-bootstrap'
 
 import './styles.scss'
 import ShoppingCart from './../../assets/shopping.svg'
@@ -12,12 +14,14 @@ import { clearCart } from '../../redux/Store/store.action'
 const mapState = ({ user, store }) => ({
   currentUser: user.currentUser,
   products: store.products,
+  userAddress: user.userAddress,
 })
 
 const Navigation = props => {
   const [openmodal, setOpenmodal] = useState()
   const [totalItem, setTotalItem] = useState(0)
-  const { currentUser, products } = useSelector(mapState)
+  const { currentUser, products, userAddress } = useSelector(mapState)
+  const [displayName, setDisplayName] = useState('')
   const dispatch = useDispatch()
   const openBoard = () => {
     console.log(props)
@@ -30,7 +34,10 @@ const Navigation = props => {
       }
     })
   }
-  console.log(products)
+  const closeModal = () => {
+    document.getElementById('menubar-toggle').checked = false
+  }
+  console.log(userAddress.displayName)
   // if (products.length > 0) {
   //   const x = products.map(item => item.value).reduce((a, b) => a + b)
   //   console.log(x)
@@ -38,16 +45,13 @@ const Navigation = props => {
   // }
   // TODO Need  number 0 as a initial  value when reduce a empty array !
   const x = products.map(item => item.value).reduce((a, b) => a + b, 0)
-  console.log(products)
   useEffect(
     () => {
       if (products.length > 0) {
         const j = products.map(item => item.value).reduce((a, b) => a + b, 0)
         setTotalItem(j)
       }
-      //  else {
-      //   setTotalItem(0)
-      // }
+
       return () => {
         setTotalItem(0)
       }
@@ -71,6 +75,7 @@ const Navigation = props => {
     localStorage.clear('oderItems')
     dispatch(clearCart())
   }
+
   return (
     <div className="wrapper-navigation">
       <div className="container-navigation">
@@ -80,58 +85,84 @@ const Navigation = props => {
             <label htmlFor="menubar-toggle" className="menubar-icon"></label>
           </label>
           <label htmlFor="menubar-toggle" className="overlay"></label>
-          <div className="menubar-modal-box">
+          <div className="menubar-modal-box" id="menubarLeft">
             <div className="menubar-header">
-              <Link className="menubar-home" to="/">
-                Home
-              </Link>
-
+              {userAddress.displayName ? (
+                <Link to="/dashboard" onClick={closeModal}>
+                  {' '}
+                  <h3>{userAddress.displayName} </h3>
+                  <span>Your account details</span>
+                </Link>
+              ) : (
+                <h3>My Account </h3>
+              )}
               <label htmlFor="menubar-toggle" className="menubar-close">
                 {' '}
                 &#10005;
               </label>
             </div>
-            <ul className="menubar-modal-wrap">
-              <li>
-                {' '}
-                <Link to="/#beliebte">Beliebte Gerichte</Link>
-              </li>
-              <li>
-                <Link to="/#suppen">Suppen</Link>
-              </li>
-              <li>
-                <Link to="/#salat"> Salat </Link>
-              </li>
-              <li>
-                <Link to="/#vorspeisen">Vorspeisen</Link>
-              </li>
-              <li>
-                <Link to="/#reisundnudeln">Gerichte mit Reis und Nudeln</Link>
-              </li>
-              <li>
-                <Link to="/#mitente">Gerichte mit Ente</Link>
-              </li>
-              <li>
-                <Link to="/#mitschwein">Gerichte mit Schweinefleisch</Link>
-              </li>
-              <li>
-                <Link to="/#mithuhn">Gerichte mit Hühnerfleisch</Link>
-              </li>
-              <li>
-                {' '}
-                <Link to="/#mitrind">Gerichte mit Rindfleisch</Link>
-              </li>
+            {currentUser ? (
+              <div className="userSection">
+                <Button variant="outline-primary" onClick={closeModal}>
+                  <Link to="/cart">Your Cart</Link>
+                </Button>
+              </div>
+            ) : (
+              <div className="userSection">
+                <Button
+                  variant="outline-primary"
+                  size="sm"
+                  onClick={closeModal}
+                >
+                  <Link to="/login">Login</Link>
+                </Button>
 
-              <li>
-                <Link to="/#vegetarian">Vegetarische Gerichte</Link>
+                <Button variant="primary" size="sm" onClick={closeModal}>
+                  <Link to="/registation">Create Account</Link>
+                </Button>
+              </div>
+            )}
+            <ul className="menubar-modal-wrap">
+              <li onClick={closeModal}>
+                {' '}
+                <Link to="/shop/#beliebte">Beliebte Gerichte</Link>
               </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#suppen">Suppen</Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#salat"> Salat </Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#vorspeisen">Vorspeisen</Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#reisundnudeln">
+                  Gerichte mit Reis und Nudeln
+                </Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#mitente">Gerichte mit Ente</Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#mitschwein">Gerichte mit Schweinefleisch</Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#mithuhn">Gerichte mit Hühnerfleisch</Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="/shop/#mitrind">Gerichte mit Rindfleisch</Link>
+              </li>
+              <li onClick={closeModal}>
+                <Link to="shop/#vegetarian">Vegetarische Gerichte</Link>
+              </li>
+              {/* add Item. Test scroll */}
             </ul>
           </div>
         </div>
         <Link to="/" className="menulink-main">
           DeXemNao
         </Link>
-        {/* <button onClick={clearItem}>Clear Cart</button> */}
         <nav className="wrapper-nav">
           <div className={`account-modal ${openmodal}`}>
             <div className="modal-link">
@@ -146,6 +177,9 @@ const Navigation = props => {
               </Link>
             </div>
           </div>
+          <Link to="/shop" className="menulink-nav login-link">
+            Our Shop
+          </Link>
           {currentUser ? (
             <div onClick={openBoard} className="wrap-account">
               <a id="openmodal-btn" className="menulink-nav navbar-btn">

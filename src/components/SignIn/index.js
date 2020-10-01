@@ -9,7 +9,7 @@ import SocialLogin from '../../ShareForm/SocialLogin'
 import FormInput from '../../ShareForm/FormInput'
 import Button from '../../ShareForm/Button'
 
-// import './styles.scss'
+import './styles.scss'
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,

@@ -10,6 +10,8 @@ import {
   getCurrentUser,
   handleUserProfile,
 } from '../../firebase/utils'
+
+import { userAddAddress } from '../../redux/User/user.actions'
 import Button from '../../ShareForm/Button'
 import { navigate, Link } from 'gatsby'
 const mapState = ({ user }) => ({
@@ -22,6 +24,7 @@ export default function DashBoard() {
   const [city, setCity] = useState('')
   const [floor, setFloor] = useState('')
   const { currentUser } = useSelector(mapState)
+  const dispatch = useDispatch()
   const getUserData = e => {
     e.preventDefault()
     const additionalData = { street, postcode, city, floor }
@@ -57,6 +60,7 @@ export default function DashBoard() {
           .get()
           .then(doc => {
             if (doc.data().street && isSubscribed) {
+              dispatch(userAddAddress(doc.data()))
               setStreet(doc.data().street)
               setPostcode(doc.data().postcode)
               setCity(doc.data().city)

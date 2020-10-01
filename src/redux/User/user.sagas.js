@@ -10,7 +10,8 @@ export function* getSnapshotFromUserAuth(user, additionalData = {}) {
       additionalData,
     })
     const snapshot = yield userRef.get()
-
+    console.log(snapshot.data())
+    yield put(userAddAddress(snapshot.data()))
     yield put(
       signInSuccess({
         id: snapshot.id,
