@@ -44,7 +44,7 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
       <div className="main-container">
-        <h1>hello from main container</h1>
+        <h1>Hello from main container</h1>
       </div>
     </div>
   )
